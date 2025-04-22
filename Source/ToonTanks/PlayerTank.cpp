@@ -35,7 +35,7 @@ void APlayerTank::Tick(float DeltaTime)
     FHitResult HitResult;
     if(PlayerControllerRef){
         PlayerControllerRef->GetHitResultUnderCursor(ECollisionChannel::ECC_Visibility, false, HitResult);
-        DrawDebugSphere(GetWorld(), HitResult.ImpactPoint, 10.0, 12, FColor::Red, false, -1.f);
+        // DrawDebugSphere(GetWorld(), HitResult.ImpactPoint, 10.0, 12, FColor::Red, false, -1.f);
         ATankPawn::RotateTurret(HitResult.ImpactPoint);
     }
 }
@@ -46,6 +46,7 @@ void APlayerTank::SetupPlayerInputComponent(UInputComponent* PlayerInputComponen
 
    PlayerInputComponent->BindAxis(TEXT("MoveForward"), this, &APlayerTank::Move);
    PlayerInputComponent->BindAxis(TEXT("Turn"), this, &APlayerTank::Turn);
+   PlayerInputComponent->BindAction(TEXT("Fire"), IE_Pressed, this, &APlayerTank::Fire);
 }
 
 void APlayerTank::Move(float value){

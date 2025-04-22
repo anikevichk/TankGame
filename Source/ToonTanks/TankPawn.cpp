@@ -4,17 +4,18 @@
 #include "TankPawn.h"
 #include "Kismet/GameplayStatics.h"
 #include "Components/CapsuleComponent.h"
+#include "DrawDebugHelpers.h"
 
 // Sets default values
 ATankPawn::ATankPawn()
 {
- 	// Set this pawn to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
+
 	CapsuleComp = CreateDefaultSubobject<UCapsuleComponent>(TEXT("Capsule Collider"));
 	RootComponent = CapsuleComp;
 
 	BaseMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Base mesh"));
-	BaseMesh->SetupAttachment(CapsuleComp);
+	BaseMesh->SetupAttachment(RootComponent);
 
 	TurretMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Turret mesh"));
 	TurretMesh->SetupAttachment(BaseMesh);
@@ -24,8 +25,9 @@ ATankPawn::ATankPawn()
 }
 
 
-void ATankPawn::RotateTurret(FVector LookAtTArget){
-	FVector ToTarget = LookAtTArget - TurretMesh->GetComponentLocation();
+
+void ATankPawn::RotateTurret(FVector LookAtTarget){
+	FVector ToTarget = LookAtTarget - TurretMesh->GetComponentLocation();
 	// FRotator LookAtRotation = ToTarget.Rotation();
 	// LookAtRotation.Roll = 0.f;
 	// LookAtRotation.Pitch = 0.f;
@@ -37,4 +39,9 @@ void ATankPawn::RotateTurret(FVector LookAtTArget){
 			LookAtRotation, 
 			UGameplayStatics::GetWorldDeltaSeconds(this), 
 			15.f));
+}
+
+void ATankPawn::Fire(){
+    DrawDebugSphere(GetWorld(), ProjectileSpawnPoint->GetComponentLocation(), 10.0, 12, FColor::Red, false, 3.f);
+
 }
