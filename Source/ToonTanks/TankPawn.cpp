@@ -2,6 +2,7 @@
 
 
 #include "TankPawn.h"
+#include "Kismet/GameplayStatics.h"
 #include "Components/CapsuleComponent.h"
 
 // Sets default values
@@ -22,17 +23,18 @@ ATankPawn::ATankPawn()
 	ProjectileSpawnPoint->SetupAttachment(TurretMesh);
 }
 
-// Called when the game starts or when spawned
-void ATankPawn::BeginPlay()
-{
-	Super::BeginPlay();
-	
+
+void ATankPawn::RotateTurret(FVector LookAtTArget){
+	FVector ToTarget = LookAtTArget - TurretMesh->GetComponentLocation();
+	// FRotator LookAtRotation = ToTarget.Rotation();
+	// LookAtRotation.Roll = 0.f;
+	// LookAtRotation.Pitch = 0.f;
+	FRotator LookAtRotation = FRotator(0.f, ToTarget.Rotation().Yaw, 0.f);
+
+	TurretMesh->SetWorldRotation(
+		FMath::RInterpTo(
+			TurretMesh->GetComponentRotation(), 
+			LookAtRotation, 
+			UGameplayStatics::GetWorldDeltaSeconds(this), 
+			15.f));
 }
-
-// Called every frame
-void ATankPawn::Tick(float DeltaTime)
-{
-	Super::Tick(DeltaTime);
-
-}
-

@@ -5,6 +5,7 @@
 #include "GameFramework/SpringArmComponent.h"
 #include "Camera/CameraComponent.h"
 #include "Kismet/GameplayStatics.h"
+#include "DrawDebugHelpers.h"
 #include "Components/CapsuleComponent.h"
 
 APlayerTank::APlayerTank()
@@ -19,6 +20,26 @@ APlayerTank::APlayerTank()
 	CameraComponent->SetupAttachment(ArmComponent);
     
 }
+
+void APlayerTank::BeginPlay()
+{
+	Super::BeginPlay();
+
+    PlayerControllerRef =Cast<APlayerController>(GetController());
+}
+
+void APlayerTank::Tick(float DeltaTime)
+{
+	Super::Tick(DeltaTime);
+
+    FHitResult HitResult;
+    if(PlayerControllerRef){
+        PlayerControllerRef->GetHitResultUnderCursor(ECollisionChannel::ECC_Visibility, false, HitResult);
+        DrawDebugSphere(GetWorld(), HitResult.ImpactPoint, 10.0, 12, FColor::Red, false, -1.f);
+        ATankPawn::RotateTurret(HitResult.ImpactPoint);
+    }
+}
+
 
 void APlayerTank::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent){
    Super::SetupPlayerInputComponent(PlayerInputComponent);

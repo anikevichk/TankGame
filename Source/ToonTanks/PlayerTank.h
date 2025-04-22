@@ -19,6 +19,11 @@ public:
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
+	virtual void Tick(float DeltaTime) override;
+	
+protected:
+	virtual void BeginPlay() override;
+
 private:
 	UPROPERTY(VisibleAnywhere, Category = "Camera")
 	class USpringArmComponent* ArmComponent;
@@ -33,4 +38,6 @@ private:
 	
 	void Move(float value);
 	void Turn(float value);
+
+	APlayerController* PlayerControllerRef;
 };
