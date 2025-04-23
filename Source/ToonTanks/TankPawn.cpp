@@ -4,6 +4,7 @@
 #include "TankPawn.h"
 #include "Kismet/GameplayStatics.h"
 #include "Components/CapsuleComponent.h"
+#include "Projectile.h"
 #include "DrawDebugHelpers.h"
 
 // Sets default values
@@ -42,6 +43,10 @@ void ATankPawn::RotateTurret(FVector LookAtTarget){
 }
 
 void ATankPawn::Fire(){
-    DrawDebugSphere(GetWorld(), ProjectileSpawnPoint->GetComponentLocation(), 10.0, 12, FColor::Red, false, 3.f);
+    // DrawDebugSphere(GetWorld(), ProjectileSpawnPoint->GetComponentLocation(), 10.0, 12, FColor::Red, false, 3.f);
+	FVector Location = ProjectileSpawnPoint->GetComponentLocation();
+	FRotator Rotator = ProjectileSpawnPoint->GetComponentRotation();
+
+	GetWorld()->SpawnActor<AProjectile>(ProjectileClass, Location, Rotator);
 
 }
