@@ -45,17 +45,18 @@ void AProjectile::Tick(float DeltaTime)
 void AProjectile::OnHit(UPrimitiveComponent *HitComp, AActor *OtherActor, UPrimitiveComponent *OtherComp, FVector NormalImpulse, const FHitResult &Hit)
 {
 	auto MyOwner = GetOwner();
-	if(MyOwner == nullptr) return;
+	if(MyOwner == nullptr || !HitParticles || !HitSound || !HitCameraShake) return;
 
 	auto MyInstigator = MyOwner->GetInstigatorController();
 	auto DamageTypeClass = UDamageType::StaticClass();
 
 	if(OtherActor && OtherActor != this && OtherActor != MyOwner){
 		UGameplayStatics::ApplyDamage(OtherActor, Damage, MyInstigator, this, DamageTypeClass);
-		if(HitParticles && HitSound){
-			UGameplayStatics::SpawnEmitterAtLocation(this, HitParticles, GetActorLocation(), GetActorRotation());
-			UGameplayStatics::PlaySoundAtLocation(this, HitSound, GetActorLocation());
-		}
+
+		UGameplayStatics::SpawnEmitterAtLocation(this, HitParticles, GetActorLocation(), GetActorRotation());
+		UGameplayStatics::PlaySoundAtLocation(this, HitSound, GetActorLocation());
+		GetWorld()->GetFirstPlayerController()->ClientStartCameraShake(HitCameraShake);
+
 	}
 	Destroy();
 }

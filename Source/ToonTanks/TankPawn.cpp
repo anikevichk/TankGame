@@ -53,8 +53,9 @@ void ATankPawn::Fire(){
 }
 
 void ATankPawn::HandleDestruction(){
-	if (!DeathEffect || !ExplodeSound) return;
+	if (!DeathEffect || !ExplodeSound || !DeathCameraShake) return;
 
 	UGameplayStatics::SpawnEmitterAtLocation(this, DeathEffect, GetActorLocation(), GetActorRotation());
 	UGameplayStatics::PlaySoundAtLocation(this, ExplodeSound, GetActorLocation());
+	GetWorld()->GetFirstPlayerController()->ClientStartCameraShake(DeathCameraShake);
 }

@@ -37,6 +37,9 @@ private:
 
 	UPROPERTY(EditAnywhere, Category = "Combat")
 	class USoundBase* ExplodeSound;
+
+	UPROPERTY(EditAnywhere, Category = "Combat")
+	TSubclassOf<class UCameraShakeBase> DeathCameraShake;
 	
 };
  
