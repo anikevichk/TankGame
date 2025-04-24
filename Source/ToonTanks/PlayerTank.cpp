@@ -70,4 +70,5 @@ void APlayerTank::HandleDestruction(){
 
     SetActorHiddenInGame(true);
     SetActorTickEnabled(false);
+    bAlive = false;
 }

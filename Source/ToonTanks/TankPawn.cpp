@@ -48,7 +48,7 @@ void ATankPawn::Fire(){
 	FVector Location = ProjectileSpawnPoint->GetComponentLocation();
 	FRotator Rotator = ProjectileSpawnPoint->GetComponentRotation();
 
-	auto Projectile = GetWorld()->SpawnActor<AProjectile>(ProjectileClass, Location, Rotator);
+	AProjectile* Projectile = GetWorld()->SpawnActor<AProjectile>(ProjectileClass, Location, Rotator);
 	Projectile->SetOwner(this);
 }
 

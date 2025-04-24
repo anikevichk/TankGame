@@ -28,7 +28,9 @@ void AEnemyTower::BeginPlay(){
 }
 
 void AEnemyTower::CheckFireCond(){
-    if(IsFireRange()){
+    if (Tank == nullptr) return;
+
+    if(IsFireRange() && Tank->bAlive){
         Fire();
     }
      
