@@ -50,3 +50,7 @@ void ATankPawn::Fire(){
 	auto Projectile = GetWorld()->SpawnActor<AProjectile>(ProjectileClass, Location, Rotator);
 	Projectile->SetOwner(this);
 }
+
+void ATankPawn::HandleDestruction(){
+	
+}

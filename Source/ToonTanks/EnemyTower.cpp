@@ -46,3 +46,8 @@ bool AEnemyTower::IsFireRange(){
 
     return false;
 }
+
+void AEnemyTower::HandleDestruction(){
+    Super::HandleDestruction();
+    Destroy();
+}

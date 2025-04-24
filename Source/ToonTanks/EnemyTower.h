@@ -10,13 +10,14 @@
  * 
  */
 UCLASS()
-class TOONTANKS_API AEnemyTower : public APlayerTank
+class TOONTANKS_API AEnemyTower : public ATankPawn
 {
 	GENERATED_BODY()
 
 public:
 	virtual void Tick(float DeltaTime) override;
 
+	void HandleDestruction();
 protected:
 	virtual void BeginPlay() override; 
 

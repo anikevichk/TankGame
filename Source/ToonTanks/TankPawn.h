@@ -14,6 +14,8 @@ class TOONTANKS_API ATankPawn : public APawn
 public:
 	// Sets default values for this pawn's properties
 	ATankPawn();
+
+	void HandleDestruction();
 protected:
 	void RotateTurret(FVector LookAtTarget);
 	void Fire();
@@ -29,5 +31,6 @@ private:
 
 	UPROPERTY(EditAnywhere, Category = "Combat")
 	TSubclassOf<class AProjectile > ProjectileClass;
+	
 };
  
