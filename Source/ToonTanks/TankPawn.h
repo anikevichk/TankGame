@@ -34,6 +34,9 @@ private:
 
 	UPROPERTY(EditAnywhere, Category = "Combat")
 	class UParticleSystem* DeathEffect;
+
+	UPROPERTY(EditAnywhere, Category = "Combat")
+	class USoundBase* ExplodeSound;
 	
 };
  

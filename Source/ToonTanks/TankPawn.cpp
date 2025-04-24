@@ -53,7 +53,8 @@ void ATankPawn::Fire(){
 }
 
 void ATankPawn::HandleDestruction(){
-	if (!DeathEffect) return;
+	if (!DeathEffect || !ExplodeSound) return;
 
 	UGameplayStatics::SpawnEmitterAtLocation(this, DeathEffect, GetActorLocation(), GetActorRotation());
+	UGameplayStatics::PlaySoundAtLocation(this, ExplodeSound, GetActorLocation());
 }

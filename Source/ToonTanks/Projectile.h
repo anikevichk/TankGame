@@ -36,9 +36,13 @@ private:
 
 	UPROPERTY(EditAnywhere, Category = "Projectile")
 	class UParticleSystem* HitParticles;
-
 	UPROPERTY(EditAnywhere, Category = "Projectile")
 	class UParticleSystemComponent* Trail;
+
+	UPROPERTY(EditAnywhere, Category = "Combat")
+	class USoundBase* HitSound;
+	UPROPERTY(EditAnywhere, Category = "Combat")
+	USoundBase* LaunchSound;
 
 public:	
 	// Called every frame

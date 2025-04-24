@@ -31,8 +31,8 @@ void AProjectile::BeginPlay()
 
 	BaseMesh->OnComponentHit.AddDynamic(this, &AProjectile::OnHit);
 	UE_LOG(LogTemp, Warning, TEXT("Projectile spawned"));
-
 	
+	UGameplayStatics::PlaySoundAtLocation(this, LaunchSound, GetActorLocation());
 }
 
 // Called every frame
@@ -52,8 +52,9 @@ void AProjectile::OnHit(UPrimitiveComponent *HitComp, AActor *OtherActor, UPrimi
 
 	if(OtherActor && OtherActor != this && OtherActor != MyOwner){
 		UGameplayStatics::ApplyDamage(OtherActor, Damage, MyInstigator, this, DamageTypeClass);
-		if(HitParticles){
+		if(HitParticles && HitSound){
 			UGameplayStatics::SpawnEmitterAtLocation(this, HitParticles, GetActorLocation(), GetActorRotation());
+			UGameplayStatics::PlaySoundAtLocation(this, HitSound, GetActorLocation());
 		}
 	}
 	Destroy();
