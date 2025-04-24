@@ -6,6 +6,7 @@
 #include "Components/CapsuleComponent.h"
 #include "Projectile.h"
 #include "DrawDebugHelpers.h"
+#include "Particles/ParticleSystem.h"
 
 // Sets default values
 ATankPawn::ATankPawn()
@@ -52,5 +53,7 @@ void ATankPawn::Fire(){
 }
 
 void ATankPawn::HandleDestruction(){
-	
+	if (!DeathEffect) return;
+
+	UGameplayStatics::SpawnEmitterAtLocation(this, DeathEffect, GetActorLocation(), GetActorRotation());
 }
