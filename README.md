@@ -10,17 +10,18 @@
 - Game flow management: start screen, win/lose conditions.
 
 ## Implemented Features
-- **C++-Driven Gameplay**  
-  Entire game logic (movement, shooting, health, death) is fully written in C++.
 
-- **Auto-Targeting Towers**  
-  Enemy towers automatically find and fire at the player.
+### C++-Driven Interaction System
+- All core mechanics (grabbing, pedestal logic, movable structures, traps) are fully implemented in C++ without relying on Blueprints.
 
-- **Projectiles and Particle Effects**  
-  Projectiles with collision detection, damage application, and visual effects for impacts.
+### Physics-Based Grabbing System
+- Realistic object pickup, movement, and placement using `UPhysicsHandleComponent`.
 
-- **Gameplay Management**  
-  Custom `GameMode` controls the start, victory, and defeat conditions, as well as screen widgets.
+### Dynamic Pedestal Logic
+- Pedestals automatically detect statues nearby and trigger events such as opening doors or activating traps.
+
+### Movable Structures and Trap Activation
+- Walls, doors, and trap mechanisms dynamically react based on pedestal states or trap triggers.
 
 ## Code Structure
 | File | Purpose |
